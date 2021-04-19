@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+   <input type="text">
+   <button>Todo</button>
+   <ul></ul>
+   <script>
+        const button = document.querySelector('button')
+        const input = document.querySelector('input')
+        function addTodo() {
+            const input = document.querySelector('input')
+            const content = input.value
+            if (content && content.trim()) {
+              const li = document.createElement('li')
+              li.innerText = content
+              const ul = document.querySelector('ul')
+              li.addEventListener('click', function (event) {
+                  console.log(event)
+                  event.target.classList.toggle('done')
+                })
+                // Delete Todo
+                const deleteButton = document.createElement('button')
+                deleteButton.innerText = 'X'
+                deleteButton.style.marginLeft = '10px'
+                li.appendChild(deleteButton)
+
+                deleteButton.addEventListener('click', function() {
+                    li.remove()
+                })
+                ul.appendChild(li)
+                input.value = ''
+                // li.style.textDecoration = 'line-through'
+
+            }else {
+                alert('텍스트를 입력해주세요')
+            }
+        }
+
+        button.addEventListener('click', addTodo)
+
+        input.addEventListener('keypress', function(event) {
+            if (event.code === 'Enter') {
+                addTodo()
+            }
+        })
+
+   </script>
+</body>
+</html>
